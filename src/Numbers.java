@@ -1,16 +1,10 @@
 
 public class Numbers {
 
-
     public static String say(long n) {
         StringBuilder devolucion = new StringBuilder();
-
-
         int[] numeroDesglosado = desglosarNum(n);
-
         devolucion.append(numeros(numeroDesglosado, n));
-
-
 
         return devolucion.toString();
     }
@@ -183,10 +177,6 @@ public class Numbers {
         }
     }
 
-
-
-
-
     //En esta funcion lo que hacemos es desglosar el numero posicion a posicion
     //Si le pasamos el numero 1234, nos devolvera lo siguiente:
     //Un array con el contenido del numero con las posiciones en orden (pos 0 = 1, pos 1 = 2, pos 2 = 3, pos 3 = 4)
@@ -199,7 +189,6 @@ public class Numbers {
             numAdividir[i-1] = x;
             x = x*10;
         }
-
         int numero = (int) num;
         for (int i = 0; i < numeros.length; i++) {
 
@@ -207,15 +196,11 @@ public class Numbers {
             num = numero%numAdividir[i];
 
         }
-
         return numeros;
-
     }
 
     public static String ceros(long n){
-
         int longitud =  Integer.toString((int)n).length();
-
         switch (longitud) {
             case 3:
                 return "hundred";
@@ -231,9 +216,7 @@ public class Numbers {
             case 11:
             case 12:
                 return "billion";
-
         }
-
         return "";
     }
 

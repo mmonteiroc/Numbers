@@ -6,13 +6,10 @@
 public class pruebas {
 
     public static void main(String[] args) {
-
         int [] desglosado = desglosarNum(1234);
         for (int i = 0; i <desglosado.length ; i++) {
             System.out.println( desglosado[i]);
         }
-
-
     }
 
     public static int[] desglosarNum(long num){
