@@ -12,6 +12,7 @@ public class pruebas {
             System.out.println( desglosado[i]);
         }
 
+
     }
 
     public static int[] desglosarNum(long num){
