@@ -98,7 +98,8 @@ public class Numbers {
             devolucion.append(" " + ceros(n));
 
             if (x[1] != 0){
-                devolucion.append(numeros(desglosarNum(n%1000000000),n%1000000000));
+                devolucion.append(" prueba ");
+                devolucion.append(numeros(desglosarNum(n%10000000),n%10000000).toLowerCase());
             }else {
                 if (x[2]!=0){
                     devolucion.append(" "+numeros(desglosarNum(n%100000000),n%100000000).toLowerCase());
