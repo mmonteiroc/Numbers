@@ -41,6 +41,9 @@ public class Numbers {
             devolucion.append(numeros(desglosarNum(n/1000),n/1000)); // si nos pasan 15.000 nos quedamos con la parte 15
             devolucion.append(" " + ceros(x));
             long[] y = desglosarNum(n%1000) ;
+            if (n%1000 <10 && n%1000!=0){
+                devolucion.append(" and");
+            }
             if (y[0]!=0){
                 devolucion.append(" "+numeros(desglosarNum(n%1000),n%1000).toLowerCase());
             }
@@ -50,6 +53,7 @@ public class Numbers {
             devolucion.append(" " + ceros(x));
 
             long[] y = desglosarNum(n%1000000) ;
+
             if (y[0]!=0){
                 devolucion.append(" "+numeros(desglosarNum(n%1000000),n%1000000).toLowerCase());
             }
@@ -78,7 +82,6 @@ public class Numbers {
             if (y[0]!=0){
                 devolucion.append(" "+ numeros(desglosarNum(n%1000_000_000_000_000L),n%1000_000_000_000_000L).toLowerCase());
             }
-
         }
         if (n>=1_000_000_000_000_000_000L ){//1 quatrillion a 1 Quintillion
             devolucion.append(numeros(desglosarNum(n/1_000_000_000_000_000_000L),n/1_000_000_000_000_000_000L));
@@ -96,27 +99,27 @@ public class Numbers {
         //En esta funcion tenemos numeros basicos los cuales son escritos de manera unica con lo cual si el numero va del 0 al 19
         // Entraremos en esta funcion la cual nos devolvera el numero en letras
         switch ((int)n){
-            case 0: return "Zero";
-            case 1: return "One";
-            case 2: return "Two";
-            case 3: return "Three";
-            case 4: return "Four";
-            case 5: return "Five";
-            case 6: return "Six";
-            case 7: return "Seven";
-            case 8: return "Eight";
-            case 9: return "Nine";
-            case 10: return "Ten";
-            case 11: return "Eleven";
-            case 12: return "Twelve";
-            case 13: return "Thirteen";
-            case 14: return "Fourteen";
-            case 15: return "Fifteen";
-            case 16: return "Sixteen";
-            case 17: return "Seventeen";
-            case 18: return "Eighteen";
-            case 19: return "Nineteen";
-            default: return "";
+            case 0:     return "Zero";
+            case 1:     return "One";
+            case 2:     return "Two";
+            case 3:     return "Three";
+            case 4:     return "Four";
+            case 5:     return "Five";
+            case 6:     return "Six";
+            case 7:     return "Seven";
+            case 8:     return "Eight";
+            case 9:     return "Nine";
+            case 10:    return "Ten";
+            case 11:    return "Eleven";
+            case 12:    return "Twelve";
+            case 13:    return "Thirteen";
+            case 14:    return "Fourteen";
+            case 15:    return "Fifteen";
+            case 16:    return "Sixteen";
+            case 17:    return "Seventeen";
+            case 18:    return "Eighteen";
+            case 19:    return "Nineteen";
+            default:    return "";
         }
     }
 
@@ -134,7 +137,6 @@ public class Numbers {
             default:return "imposible";
         }
     }
-
 
     public static long[] desglosarNum(long num){
         //En esta funcion lo que hacemos es desglosar el numero posicion a posicion
@@ -165,38 +167,23 @@ public class Numbers {
         switch (longitud) {
             case 3:
                 return "hundred";
-            case 4:
-            case 5:
-            case 6:
+            case 4: case 5: case 6:
                 return "thousand";
-            case 7:
-            case 8:
-            case 9:
+            case 7: case 8: case 9:
                 return "million";
-            case 10:
-            case 11:
-            case 12:
+            case 10: case 11:case 12:
                 return "billion";
-            case 13:
-            case 14:
-            case 15:
+            case 13: case 14: case 15:
                 return "trillion";
-            case 16:
-            case 17:
-            case 18:
+            case 16:case 17: case 18:
                 return "quadrillion";
-            case 19:
-            case 20:
-            case 21:
+            case 19: case 20: case 21:
                 return "quintillion";
         }
         return "";
     }
 
-
-
     public static long words(String s) {
-
         String[] palabras = s.split(" ");
         long devolver = 0;
 
@@ -216,7 +203,6 @@ public class Numbers {
             palabras = palabras1;
             s = nuevaFrase.toString();
         }
-
 
         if (palabras.length == 1) { //Si la frase del numero es una unica palabra entramos en esta condicion
             if (s.contains("-")) return decimals(s); //Si contiene un guion, vamos a la funcion de decimales

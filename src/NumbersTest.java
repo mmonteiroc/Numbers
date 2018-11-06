@@ -36,8 +36,8 @@ public class NumbersTest {
 
     @org.junit.Test
     public void test5() {
+        assertEquals("Two thousand and three", Numbers.say(2003));
         assertEquals("One thousand", Numbers.say(1000));
-        assertEquals("Two thousand", Numbers.say(2000));
         assertEquals("Two thousand three hundred", Numbers.say(2300));
         assertEquals("Four thousand five hundred and sixty-one", Numbers.say(4561));
     }
