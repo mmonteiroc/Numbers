@@ -5,13 +5,13 @@ public class Numbers {
 
     public static String say(long n) {
         StringBuilder devolucion = new StringBuilder();
-        int[] numeroDesglosado = desglosarNum(n);
+        long[] numeroDesglosado = desglosarNum(n);
         devolucion.append(numeros(numeroDesglosado, n));
 
         return devolucion.toString();
     }
 
-    public static String numeros(int[] x, long n){
+    public static String numeros(long[] x, long n){
         StringBuilder devolucion = new StringBuilder();
 
         if (n < 20){ // Solo si el numero es unico
@@ -38,7 +38,7 @@ public class Numbers {
         if (n>=1000 && n < 1000000){//1000 to 1000000
             devolucion.append(numeros(desglosarNum(n/1000),n/1000)); // si nos pasan 15.000 nos quedamos con la parte 15
             devolucion.append(" " + ceros(x));
-            int[] y = desglosarNum(n%1000) ;
+            long[] y = desglosarNum(n%1000) ;
             if (y[0]!=0){
                 devolucion.append(" "+numeros(desglosarNum(n%1000),n%1000).toLowerCase());
             }
@@ -47,7 +47,7 @@ public class Numbers {
             devolucion.append(numeros(desglosarNum(n/1000000),n/1000000));
             devolucion.append(" " + ceros(x));
 
-            int[] y = desglosarNum(n%1000000) ;
+            long[] y = desglosarNum(n%1000000) ;
             if (y[0]!=0){
                 devolucion.append(" "+numeros(desglosarNum(n%1000000),n%1000000).toLowerCase());
             }
@@ -55,7 +55,7 @@ public class Numbers {
         if (n>=1_000_000_000 && n < 1_000_000_000_000L){ // De 1 billion a 1 trillion
             devolucion.append(numeros(desglosarNum(n/1_000_000_000),n/1_000_000_000));
             devolucion.append(" " + ceros(x));
-            int[] y = desglosarNum(n%1_000_000_000) ;
+            long[] y = desglosarNum(n%1_000_000_000) ;
             if (y[0]!=0){
                 devolucion.append(" "+numeros(desglosarNum(n%1_000_000_000),n%1_000_000_000).toLowerCase());
             }
@@ -63,7 +63,7 @@ public class Numbers {
         if (n>=1_000_000_000_000L && n < 1_000_000_000_000_000L){// De 1 trillion a 1 quatrillion
             devolucion.append(numeros(desglosarNum(n/1_000_000_000_000L),n/1_000_000_000_000L));
             devolucion.append(" " + ceros(x));
-            int[] y = desglosarNum(n%100_000_000_000L) ;
+            long[] y = desglosarNum(n%100_000_000_000L) ;
             if (y[0]!=0){
                 devolucion.append(" "+numeros(desglosarNum(n%1000_000_000_000L),n%1000_000_000_000L).toLowerCase());
             }
@@ -72,7 +72,7 @@ public class Numbers {
         if (n>=1_000_000_000_000_000L && n<1_000_000_000_000_000_000L){//1 quatrillion a 1 Quintillion
             devolucion.append(numeros(desglosarNum(n/1_000_000_000_000_000L),n/1_000_000_000_000_000L));
             devolucion.append(" "+ ceros(x));
-            int[]y = desglosarNum(n%1_000_000_000_000_000L);
+            long[]y = desglosarNum(n%1_000_000_000_000_000L);
             if (y[0]!=0){
                 devolucion.append(" "+ numeros(desglosarNum(n%1000_000_000_000_000L),n%1000_000_000_000_000L).toLowerCase());
             }
@@ -81,7 +81,7 @@ public class Numbers {
         if (n>=1_000_000_000_000_000_000L ){//1 quatrillion a 1 Quintillion
             devolucion.append(numeros(desglosarNum(n/1_000_000_000_000_000_000L),n/1_000_000_000_000_000_000L));
             devolucion.append(" "+ ceros(x));
-            int[]y = desglosarNum(n%1_000_000_000_000_000_000L);
+            long[]y = desglosarNum(n%1_000_000_000_000_000_000L);
             if (y[0]!=0){
                 devolucion.append(" "+ numeros(desglosarNum(n%1_000_000_000_000_000_000L),n%1_000_000_000_000_000_000L).toLowerCase());
             }
@@ -121,9 +121,9 @@ public class Numbers {
         }
     }
 
-    public static String decenas (int x){
+    public static String decenas (long x){
         //ESTA FUNCION NOS DEVUELVE LOS NUMEROS 20,30,40,50,60,70,80,90 YA QUE SON UNICOS
-        switch (x){
+        switch ((int)x){
             case 2:return "Twenty";
             case 3:return "Thirty";
             case 4:return "Forty";
@@ -137,11 +137,11 @@ public class Numbers {
     }
 
 
-    public static int[] desglosarNum(long num){
+    public static long[] desglosarNum(long num){
         //En esta funcion lo que hacemos es desglosar el numero posicion a posicion
         //Si le pasamos el numero 1234, nos devolvera lo siguiente:
         //Un array con el contenido del numero con las posiciones en orden (pos 0 = 1, pos 1 = 2, pos 2 = 3, pos 3 = 4)
-        int[] numeros = new int[Long.toString(num).length()];
+        long[] numeros = new long[Long.toString(num).length()];
         int longNum = Long.toString(num).length();
         long[] numAdividir = new long[longNum];
 
@@ -158,7 +158,7 @@ public class Numbers {
         return numeros;
     }
 
-    public static String ceros(int [] n){
+    public static String ceros(long[] n){
         //Funcion que dependiendo de la longitud del nº nos
         // retornara lo que le pertenezca (hundred,million......)
 
