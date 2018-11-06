@@ -13,86 +13,62 @@ public class Numbers {
         return devolucion.toString();
     }
 
-    public static String numeros(long[] x, long n){
+    public static String numeros(long[] x, long numero){
         StringBuilder devolucion = new StringBuilder();
 
-        if (n < 20){ // Solo si el numero es unico
-            return numBasicos(n);
+        if (numero < 20){ // Solo si el numero es unico
+            return numBasicos(numero);
         }
 
-        if (n<100){
+        if (numero<100){
             devolucion.append(decenas(x[0]));
             if (x[1] != 0)devolucion.append("-"+(numBasicos(x[1])).toLowerCase());
         }
 
-        if (n >= 100 && n <1000){ //100 to 1000  Entre cien y mill
-            devolucion.append(numeros(desglosarNum(n/100),n/100));   // Aqui nos quedamos con las centenas en
+        if (numero >= 100 && numero <1000){ //100 to 1000  Entre cien y mill
+            devolucion.append(numeros(desglosarNum(numero/100),numero/100));   // Aqui nos quedamos con las centenas en
             // adelante y hacemos recursividad solo de las centenas
             devolucion.append(" " + ceros(x)); //Pedimos a la funcion ceros, que hemos de añadir (hundred, million, ........)
             if (x[1] != 0){
-                devolucion.append(" and "+numeros(desglosarNum(n%100),n%100).toLowerCase());
+                devolucion.append(" and "+numeros(desglosarNum(numero%100),numero%100).toLowerCase());
             }else {
                 if (x[2] != 0){
-                    devolucion.append(" and "+ numBasicos(n%10).toLowerCase());
+                    devolucion.append(" and "+ numBasicos(numero%10).toLowerCase());
                 }
             }
         }
-        if (n>=1000 && n < 1000000){//1000 to 1000000
-            devolucion.append(numeros(desglosarNum(n/1000),n/1000)); // si nos pasan 15.000 nos quedamos con la parte 15
-            devolucion.append(" " + ceros(x));
-            long[] y = desglosarNum(n%1000) ;
-            if (n%1000 <10 && n%1000!=0){
-                devolucion.append(" and");
-            }
-            if (y[0]!=0){
-                devolucion.append(" "+numeros(desglosarNum(n%1000),n%1000).toLowerCase());
-            }
+        if (numero>=1000 && numero < 1000000){//1000 to 1000000
+            devolucion.append(xxx(1000,numero,x));
         }
-        if (n>=1000000 && n < 1000_000_000){ //1.000.000 to 1.000.000.000
-            devolucion.append(numeros(desglosarNum(n/1000000),n/1000000));
-            devolucion.append(" " + ceros(x));
-
-            long[] y = desglosarNum(n%1000000) ;
-
-            if (y[0]!=0){
-                devolucion.append(" "+numeros(desglosarNum(n%1000000),n%1000000).toLowerCase());
-            }
+        if (numero>=1000000 && numero < 1000_000_000){ //1.000.000 to 1.000.000.000
+            devolucion.append(xxx(1000000,numero,x));
         }
-        if (n>=1_000_000_000 && n < 1_000_000_000_000L){ // De 1 billion a 1 trillion
-            devolucion.append(numeros(desglosarNum(n/1_000_000_000),n/1_000_000_000));
-            devolucion.append(" " + ceros(x));
-            long[] y = desglosarNum(n%1_000_000_000) ;
-            if (y[0]!=0){
-                devolucion.append(" "+numeros(desglosarNum(n%1_000_000_000),n%1_000_000_000).toLowerCase());
-            }
+        if (numero>=1_000_000_000 && numero < 1_000_000_000_000L){ // De 1 billion a 1 trillion
+            devolucion.append(xxx(1_000_000_000,numero,x));
         }
-        if (n>=1_000_000_000_000L && n < 1_000_000_000_000_000L){// De 1 trillion a 1 quatrillion
-            devolucion.append(numeros(desglosarNum(n/1_000_000_000_000L),n/1_000_000_000_000L));
-            devolucion.append(" " + ceros(x));
-            long[] y = desglosarNum(n%100_000_000_000L) ;
-            if (y[0]!=0){
-                devolucion.append(" "+numeros(desglosarNum(n%1000_000_000_000L),n%1000_000_000_000L).toLowerCase());
-            }
+        if (numero>=1_000_000_000_000L && numero < 1_000_000_000_000_000L){// De 1 trillion a 1 quatrillion
+            devolucion.append(xxx(1_000_000_000_000L,numero,x));
         }
 
-        if (n>=1_000_000_000_000_000L && n<1_000_000_000_000_000_000L){//1 quatrillion a 1 Quintillion
-            devolucion.append(numeros(desglosarNum(n/1_000_000_000_000_000L),n/1_000_000_000_000_000L));
-            devolucion.append(" "+ ceros(x));
-            long[]y = desglosarNum(n%1_000_000_000_000_000L);
-            if (y[0]!=0){
-                devolucion.append(" "+ numeros(desglosarNum(n%1000_000_000_000_000L),n%1000_000_000_000_000L).toLowerCase());
-            }
+        if (numero>=1_000_000_000_000_000L && numero<1_000_000_000_000_000_000L){//1 quatrillion a 1 Quintillion
+            devolucion.append(xxx(1_000_000_000_000_000L,numero,x));
         }
-        if (n>=1_000_000_000_000_000_000L ){//1 quatrillion a 1 Quintillion
-            devolucion.append(numeros(desglosarNum(n/1_000_000_000_000_000_000L),n/1_000_000_000_000_000_000L));
-            devolucion.append(" "+ ceros(x));
-            long[]y = desglosarNum(n%1_000_000_000_000_000_000L);
-            if (y[0]!=0){
-                devolucion.append(" "+ numeros(desglosarNum(n%1_000_000_000_000_000_000L),n%1_000_000_000_000_000_000L).toLowerCase());
-            }
-
+        if (numero>=1_000_000_000_000_000_000L ){//1 Quintillion to +++++++++
+            devolucion.append(xxx(1_000_000_000_000_000_000L, numero,x));
         }
         return devolucion.toString();
+    }
+
+    //Multiplicador
+    public static String xxx(long multiplicador,long numero, long[] numDesglosado){
+        StringBuilder string = new StringBuilder();
+        string.append(numeros(desglosarNum(numero/multiplicador),numero/multiplicador));
+        string.append(" "+ceros(numDesglosado));
+        long[]y = desglosarNum(numero%multiplicador);
+        if (y[0]!=0){
+            string.append(" "+ numeros(desglosarNum(numero%multiplicador),numero%multiplicador).toLowerCase());
+        }
+        return string.toString();
     }
 
     public static String numBasicos(long n){
@@ -259,7 +235,6 @@ public class Numbers {
             //Cortador: 3
             //Multiplicador: 100000
             return wordToNumbers(s,100000,3);
-
         }else if (s.contains("thousand")){
             //cortador: 2
             //Multiplicador: 1000
