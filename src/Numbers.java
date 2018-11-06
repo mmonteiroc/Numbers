@@ -306,7 +306,6 @@ public class Numbers {
     }
 
     public static long wordToNumbers (String num, long multiplicador, int cortador){
-
         long devolver =0;
         String[] palabras = num.split(" ");
 
