@@ -13,7 +13,7 @@ public class Numbers {
         return devolucion.toString();
     }
 
-    public static String numeros(long[] x, long numero){
+    public static String numeros(long[] numeroDesglosado, long numero){
         StringBuilder devolucion = new StringBuilder();
 
         if (numero < 20){ // Solo si el numero es unico
@@ -21,51 +21,51 @@ public class Numbers {
         }
 
         if (numero<100){
-            devolucion.append(decenas(x[0]));
-            if (x[1] != 0)devolucion.append("-"+(numBasicos(x[1])).toLowerCase());
+            devolucion.append(decenas(numeroDesglosado[0]));
+            if (numeroDesglosado[1] != 0)devolucion.append("-"+(numBasicos(numeroDesglosado[1])).toLowerCase());
         }
 
         if (numero >= 100 && numero <1000){ //100 to 1000  Entre cien y mill
             devolucion.append(numeros(desglosarNum(numero/100),numero/100));   // Aqui nos quedamos con las centenas en
             // adelante y hacemos recursividad solo de las centenas
-            devolucion.append(" " + ceros(x)); //Pedimos a la funcion ceros, que hemos de añadir (hundred, million, ........)
-            if (x[1] != 0){
+            devolucion.append(" " + ceros(numeroDesglosado)); //Pedimos a la funcion ceros, que hemos de añadir (hundred, million, ........)
+            if (numeroDesglosado[1] != 0){
                 devolucion.append(" and "+numeros(desglosarNum(numero%100),numero%100).toLowerCase());
             }else {
-                if (x[2] != 0){
+                if (numeroDesglosado[2] != 0){
                     devolucion.append(" and "+ numBasicos(numero%10).toLowerCase());
                 }
             }
         }
         if (numero>=1000 && numero < 1000000){//1000 to 1000000
-            devolucion.append(xxx(1000,numero,x));
+            devolucion.append(calcularNumero(1000,numero,numeroDesglosado));
         }
         if (numero>=1000000 && numero < 1000_000_000){ //1.000.000 to 1.000.000.000
-            devolucion.append(xxx(1000000,numero,x));
+            devolucion.append(calcularNumero(1000000,numero,numeroDesglosado));
         }
         if (numero>=1_000_000_000 && numero < 1_000_000_000_000L){ // De 1 billion a 1 trillion
-            devolucion.append(xxx(1_000_000_000,numero,x));
+            devolucion.append(calcularNumero(1_000_000_000,numero,numeroDesglosado));
         }
         if (numero>=1_000_000_000_000L && numero < 1_000_000_000_000_000L){// De 1 trillion a 1 quatrillion
-            devolucion.append(xxx(1_000_000_000_000L,numero,x));
+            devolucion.append(calcularNumero(1_000_000_000_000L,numero,numeroDesglosado));
         }
         if (numero>=1_000_000_000_000_000L && numero<1_000_000_000_000_000_000L){//1 quatrillion a 1 Quintillion
-            devolucion.append(xxx(1_000_000_000_000_000L,numero,x));
+            devolucion.append(calcularNumero(1_000_000_000_000_000L,numero,numeroDesglosado));
         }
         if (numero>=1_000_000_000_000_000_000L ){//1 Quintillion to +++++++++
-            devolucion.append(xxx(1_000_000_000_000_000_000L, numero,x));
+            devolucion.append(calcularNumero(1_000_000_000_000_000_000L, numero,numeroDesglosado));
         }
         return devolucion.toString();
     }
 
     //Multiplicador
-    public static String xxx(long multiplicador,long numero, long[] numDesglosado){
+    public static String calcularNumero(long divisor, long numero, long[] numDesglosado){
         StringBuilder string = new StringBuilder();
-        string.append(numeros(desglosarNum(numero/multiplicador),numero/multiplicador));
+        string.append(numeros(desglosarNum(numero/divisor),numero/divisor));
         string.append(" "+ceros(numDesglosado));
-        long[]y = desglosarNum(numero%multiplicador);
+        long[]y = desglosarNum(numero%divisor);
         if (y[0]!=0){
-            string.append(" "+ numeros(desglosarNum(numero%multiplicador),numero%multiplicador).toLowerCase());
+            string.append(" "+ numeros(desglosarNum(numero%divisor),numero%divisor).toLowerCase());
         }
         return string.toString();
     }
