@@ -1,7 +1,7 @@
 /**
  * @author mmonteiro
- * @project Pactica1
- * Creation date: 6/11/18
+ * @project Pactica Numbers
+ * Creation date: 5/11/18
  */
 public class Numbers {
 
