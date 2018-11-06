@@ -52,22 +52,43 @@ public class Numbers {
                 devolucion.append(" "+numeros(desglosarNum(n%1000000),n%1000000).toLowerCase());
             }
         }
-        if (n>=1000_000_000 && n < 1000_000_000_000L){
-            devolucion.append(numeros(desglosarNum(n/1000_000_000),n/1000_000_000));
+        if (n>=1_000_000_000 && n < 1_000_000_000_000L){ // De 1 billion a 1 trillion
+            devolucion.append(numeros(desglosarNum(n/1_000_000_000),n/1_000_000_000));
             devolucion.append(" " + ceros(x));
-            int[] y = desglosarNum(n%1000_000_000) ;
+            int[] y = desglosarNum(n%1_000_000_000) ;
             if (y[0]!=0){
-                devolucion.append(" "+numeros(desglosarNum(n%1000_000_000),n%1000_000_000).toLowerCase());
+                devolucion.append(" "+numeros(desglosarNum(n%1_000_000_000),n%1_000_000_000).toLowerCase());
             }
         }
-        if (n>=1000_000_000_000L && n < 1000_000_000_000_000L){
-            devolucion.append(numeros(desglosarNum(n/1000_000_000_000L),n/1000_000_000_000L));
+        if (n>=1_000_000_000_000L && n < 1_000_000_000_000_000L){// De 1 trillion a 1 quatrillion
+            devolucion.append(numeros(desglosarNum(n/1_000_000_000_000L),n/1_000_000_000_000L));
             devolucion.append(" " + ceros(x));
-            int[] y = desglosarNum(n%1000_000_000_000L) ;
+            int[] y = desglosarNum(n%100_000_000_000L) ;
             if (y[0]!=0){
                 devolucion.append(" "+numeros(desglosarNum(n%1000_000_000_000L),n%1000_000_000_000L).toLowerCase());
             }
         }
+
+        if (n>=1_000_000_000_000_000L && n<1_000_000_000_000_000_000L){//1 quatrillion a 1 Quintillion
+            devolucion.append(numeros(desglosarNum(n/1_000_000_000_000_000L),n/1_000_000_000_000_000L));
+            devolucion.append(" "+ ceros(x));
+            int[]y = desglosarNum(n%1_000_000_000_000_000L);
+            if (y[0]!=0){
+                devolucion.append(" "+ numeros(desglosarNum(n%1000_000_000_000_000L),n%1000_000_000_000_000L).toLowerCase());
+            }
+
+        }
+        if (n>=1_000_000_000_000_000_000L ){//1 quatrillion a 1 Quintillion
+            devolucion.append(numeros(desglosarNum(n/1_000_000_000_000_000_000L),n/1_000_000_000_000_000_000L));
+            devolucion.append(" "+ ceros(x));
+            int[]y = desglosarNum(n%1_000_000_000_000_000_000L);
+            if (y[0]!=0){
+                devolucion.append(" "+ numeros(desglosarNum(n%1_000_000_000_000_000_000L),n%1_000_000_000_000_000_000L).toLowerCase());
+            }
+
+        }
+
+
 
         return devolucion.toString();
     }
@@ -115,29 +136,32 @@ public class Numbers {
         }
     }
 
-    //En esta funcion lo que hacemos es desglosar el numero posicion a posicion
-    //Si le pasamos el numero 1234, nos devolvera lo siguiente:
-    //Un array con el contenido del numero con las posiciones en orden (pos 0 = 1, pos 1 = 2, pos 2 = 3, pos 3 = 4)
-    public static int[] desglosarNum(long num){
-        int[] numeros = new int[Integer.toString((int)num).length()];
-        int longNum = Integer.toString((int)num).length();
-        int[] numAdividir = new int[longNum];
 
-        for (int i = longNum,j=0, x = 1; i > 0; i--,j++) {
+    public static int[] desglosarNum(long num){
+        //En esta funcion lo que hacemos es desglosar el numero posicion a posicion
+        //Si le pasamos el numero 1234, nos devolvera lo siguiente:
+        //Un array con el contenido del numero con las posiciones en orden (pos 0 = 1, pos 1 = 2, pos 2 = 3, pos 3 = 4)
+        int[] numeros = new int[Long.toString(num).length()];
+        int longNum = Long.toString(num).length();
+        long[] numAdividir = new long[longNum];
+
+        long x =1;
+        for (int i = longNum,j=0; i > 0; i--,j++) {
             numAdividir[i-1] = x;
             x = x*10;
         }
-        int numero = (int) num;
+        long numero = num;
         for (int i = 0; i < numeros.length; i++) {
-
-            numeros[i] =(int) num/numAdividir[i];
+            numeros[i] = (int)(num/numAdividir[i]);
             num = numero%numAdividir[i];
-
         }
         return numeros;
     }
 
     public static String ceros(int [] n){
+        //Funcion que dependiendo de la longitud del nº nos
+        // retornara lo que le pertenezca (hundred,million......)
+
         int longitud =  n.length;
         switch (longitud) {
             case 3:
@@ -162,6 +186,10 @@ public class Numbers {
             case 17:
             case 18:
                 return "quadrillion";
+            case 19:
+            case 20:
+            case 21:
+                return "quintillion";
 
         }
         return "";
@@ -228,9 +256,7 @@ public class Numbers {
         return devolver;
     }
 
-
-
-    public static long basicNumbers(String s){
+     public static long basicNumbers(String s){
         switch (s){ //Definimos numeros especiales unicos
             case "zero":return(0);
             case "one":return(1);
@@ -262,10 +288,7 @@ public class Numbers {
             case "ninety":return(90);
             default:return 0;
         }
-
-
     }
-
 
     //FUNCIONES PARA DESGLOSAR Y AÑADIR NUMEROS
     //Linea 271 to
@@ -319,12 +342,7 @@ public class Numbers {
 
         if (palabras.length >3){
             //Creamos un array con el resto de los numeros
-            StringBuilder nuevoNum = new StringBuilder();
-            for (int i = 3; i < palabras.length; i++) {
-                nuevoNum.append(palabras[i]);
-                nuevoNum.append(" ");
-            }
-            devolver+= words(nuevoNum.toString());
+            devolver+= words(nuevoNumero3(palabras));
         }
         return devolver;
     }
@@ -338,13 +356,9 @@ public class Numbers {
         devolver *= 1000000;
 
         if (palabras.length >2){// Si no es exacto, tendra mas de 2 palabras con lo cual, creamos un nuevo string quitando las 2 primeras palabras
-            // Y volvemos a llamar la funcion principal words con ese numero acortado
-            //Creamos un array con el resto de los numeros
-            StringBuilder newNum = new StringBuilder();
-            for (int i = 2; i < palabras.length; i++) {
-                newNum.append(palabras[i]+" ");
-            }
-            devolver+= words(newNum.toString());
+                                // Y volvemos a llamar la funcion principal words con ese numero acortado
+                                //Creamos un array con el resto de los numeros
+            devolver+= words(nuevoNumero2(palabras));
         }
         return devolver;
     }
@@ -359,14 +373,10 @@ public class Numbers {
         devolver += words(palabras[0].toLowerCase()); // Añadimos el primer numero de la frase a devolver
         devolver *= 100000000;  // Lo multiplicamos por 100.000.000 (Esto nos soluciona si son numeros exactos Ex: 300.000.000)
 
-        if (palabras.length > 3){ // Si no es exacto, tendra mas de 3 palabras con lo cual, creamos un nuevo string quitando las 3 primeras palabras
-            // Y volvemos a llamar la funcion principal words con ese numero acortado
-            //Creamos un array con el resto de los numeros
-            StringBuilder nuevoNum = new StringBuilder();
-            for (int i = 3; i < palabras.length; i++) {
-                nuevoNum.append(palabras[i]+" ");
-            }
-            devolver += words(nuevoNum.toString());
+        if (palabras.length > 3){       // Si no es exacto, tendra mas de 3 palabras con lo cual, creamos un nuevo string quitando las 3 primeras palabras
+                                        // Y volvemos a llamar la funcion principal words con ese numero acortado
+                                        //Creamos un array con el resto de los numeros
+            devolver += words(nuevoNumero3(palabras));
         }
         return devolver;
     }
