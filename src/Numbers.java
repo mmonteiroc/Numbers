@@ -1,6 +1,8 @@
-import javax.lang.model.util.ElementScanner6;
-import java.sql.Struct;
-
+/**
+ * @author mmonteiro
+ * @project Pactica1
+ * Creation date: 6/11/18
+ */
 public class Numbers {
 
     public static String say(long n) {
@@ -25,7 +27,7 @@ public class Numbers {
 
         if (n >= 100 && n <1000){ //100 to 1000  Entre cien y mill
             devolucion.append(numeros(desglosarNum(n/100),n/100));   // Aqui nos quedamos con las centenas en
-                                                                        // adelante y hacemos recursividad solo de las centenas
+            // adelante y hacemos recursividad solo de las centenas
             devolucion.append(" " + ceros(x)); //Pedimos a la funcion ceros, que hemos de añadir (hundred, million, ........)
             if (x[1] != 0){
                 devolucion.append(" and "+numeros(desglosarNum(n%100),n%100).toLowerCase());
@@ -87,9 +89,6 @@ public class Numbers {
             }
 
         }
-
-
-
         return devolucion.toString();
     }
 
@@ -152,7 +151,7 @@ public class Numbers {
         }
         long numero = num;
         for (int i = 0; i < numeros.length; i++) {
-            numeros[i] = (int)(num/numAdividir[i]);
+            numeros[i] = (num/numAdividir[i]);
             num = numero%numAdividir[i];
         }
         return numeros;
@@ -190,7 +189,6 @@ public class Numbers {
             case 20:
             case 21:
                 return "quintillion";
-
         }
         return "";
     }
@@ -228,27 +226,58 @@ public class Numbers {
         //Comprobamos el numero que es con las palabras que
         // contiene y llamamos a la funcion que le pertenece
         if (s.contains("quintillion")){
-            return quintillions(s);
+            //Multiplicador: 1_000_000_000_000_000_000L
+            //cortador: 2
+            return wordToNumbers(s,1_000_000_000_000_000_000L,2);
+
         }else if (palabras[1].contains("hundred") && s.contains("quadrillion") || s.contains("hundred quadrillion")){
-            return hundQuadrillion(s);
+            //Multiplicador: 100_000_000_000_000_000L
+            // Cortador: 3
+            return wordToNumbers(s,100_000_000_000_000_000L,3);
+
         }else if (s.contains("quadrillion")){
-            return quadrillions(s);
+            //Multiplicador: 1_000_000_000_000_000L
+            //cortador: 2
+            return wordToNumbers(s,1_000_000_000_000_000L,2);
+
         }else if (palabras[1].contains("hundred") && s.contains("trillion") || s.contains("hundred trillion")){
-            return hundTrillions(s);
+            //Cortador: 3
+            //Multiplicador: 100_000_000_000_000L
+            return wordToNumbers(s,100_000_000_000_000L,3);
+
         }else if (s.contains("trillion")){
-            return trillions(s);
+            //cortador: 2
+            //Multiplicador: 1_000_000_000_000L
+            return wordToNumbers(s,1_000_000_000_000L,2);
+
         }else if (palabras[1].contains("hundred") && s.contains("billion") || s.contains("hundred billion")){
-            return hundBillions(s);
+            //Cortador: 3
+            //Multiplicador: 100_000_000_000L
+            return wordToNumbers(s,100_000_000_000L,3);
+
         }else if (s.contains("billion")){
-            return billions(s);
+            //cortador: 2
+            //Multiplicador: 1_000_000_000
+            return wordToNumbers(s,1_000_000_000,2);
+
         }else if (palabras[1].contains("hundred")&& s.contains("million") || s.contains("hundred million")){
-            return  hundMilions(s);
+            //Cortador: 3
+            //Multiplicador: 100000000
+            return wordToNumbers(s,100000000,3);
+
         }else if (s.contains("million")) {
-            return millions(s);
+            //cortador: 2
+            //Multiplicador: 1000000
+            return wordToNumbers(s,1000000,2);
         }else if (palabras[1].contains("hundred")&&s.contains("thousand") || s.contains("hundred thousand")){
-            return hunThous(s);
+            //Cortador: 3
+            //Multiplicador: 100000
+            return wordToNumbers(s,100000,3);
+
         }else if (s.contains("thousand")){
-            return thousand(s);
+            //cortador: 2
+            //Multiplicador: 1000
+            return wordToNumbers(s,1000,2);
         }else if(s.contains("hundred")){
             return hundred(s);
         }
@@ -256,7 +285,7 @@ public class Numbers {
         return devolver;
     }
 
-     public static long basicNumbers(String s){
+    public static long basicNumbers(String s){
         switch (s){ //Definimos numeros especiales unicos
             case "zero":return(0);
             case "one":return(1);
@@ -316,189 +345,24 @@ public class Numbers {
         return devolver;
     }
 
-    public static long thousand(String num){
-        long devolver =0;
-        String[] palabras = num.split(" ");
+    public static long wordToNumbers (String num, long multiplicador, int cortador){
 
-        devolver += words(palabras[0].toLowerCase());//solucionamos los numeros multiplos de 1000 exactos
-        devolver *= 1000;
-
-        if (palabras.length >2){
-            //Creamos un array con el resto de los numeros
-            devolver+= words(nuevoNumero2(palabras));
-        }
-        return devolver;
-    }
-
-    public static long hunThous(String num) {
-        //Esta funcion la usaremos para numeros que contengan en el numero en letras Hundred && thousand
-        // (pero hundred siempre estara delante)
-        long devolver =0;
-        String[] palabras = num.split(" ");
-
-        //Para numeros exactos ( 100.000, 130.0000)
-        devolver += basicNumbers(palabras[0].toLowerCase());
-        devolver *= 100000;
-
-        if (palabras.length >3){
-            //Creamos un array con el resto de los numeros
-            devolver+= words(nuevoNumero3(palabras));
-        }
-        return devolver;
-    }
-
-    public static long millions(String num){
-        //Esta funcion la usaremos para numeros que contengan en el numero en letras  million
-        long devolver =0;
-        String[] palabras = num.split(" ");
-
-        devolver += words(palabras[0].toLowerCase());
-        devolver *= 1000000;
-
-        if (palabras.length >2){// Si no es exacto, tendra mas de 2 palabras con lo cual, creamos un nuevo string quitando las 2 primeras palabras
-                                // Y volvemos a llamar la funcion principal words con ese numero acortado
-                                //Creamos un array con el resto de los numeros
-            devolver+= words(nuevoNumero2(palabras));
-        }
-        return devolver;
-    }
-
-    public static long hundMilions(String num){
-        //Esta funcion la usaremos para numeros que contengan en el numero en letras Hundred && milion
-        // (pero hundred siempre estara delante)
-
-        long devolver =0;
-        String[] palabras = num.split(" ");
-
-        devolver += words(palabras[0].toLowerCase()); // Añadimos el primer numero de la frase a devolver
-        devolver *= 100000000;  // Lo multiplicamos por 100.000.000 (Esto nos soluciona si son numeros exactos Ex: 300.000.000)
-
-        if (palabras.length > 3){       // Si no es exacto, tendra mas de 3 palabras con lo cual, creamos un nuevo string quitando las 3 primeras palabras
-                                        // Y volvemos a llamar la funcion principal words con ese numero acortado
-                                        //Creamos un array con el resto de los numeros
-            devolver += words(nuevoNumero3(palabras));
-        }
-        return devolver;
-    }
-
-    public static long billions(String num){
-        //Esta funcion la usaremos para numeros que contengan en el numero en letras billion
-        long devolver =0;
-        String[] palabras = num.split(" ");
-
-        devolver += words(palabras[0].toLowerCase()); // Añadimos el primer numero de la frase a devolver
-        devolver *= 1_000_000_000;  // Lo multiplicamos por 1.000.000.000 (Esto nos soluciona si son numeros exactos Ex: 3.000.000.000)
-
-        if (palabras.length >2){
-            devolver += words(nuevoNumero2(palabras));
-        }
-        return devolver;
-    }
-
-    public static long hundBillions(String num){
-        //Esta funcion la usaremos para numeros que contengan en el numero en letras hundred && billion
-        // (pero hundred siempre estara delante)
-        long devolver =0;
-        String[] palabras = num.split(" ");
-
-        devolver += words(palabras[0].toLowerCase()); // Añadimos el primer numero de la frase a devolver
-        devolver *= 100_000_000_000L;  // Lo multiplicamos por 100.000.000.000 (Esto nos soluciona si son numeros exactos Ex: 300.000.000.000)
-
-        if (palabras.length>3){
-            devolver+= words(nuevoNumero3(palabras));
-        }
-        return devolver;
-    }
-
-    public static long trillions(String num){
-        //Esta funcion la usaremos para numeros que contengan en el numero en letras trillion
-        long devolver =0;
-        String[] palabras = num.split(" ");
-
-        devolver += words(palabras[0].toLowerCase()); // Añadimos el primer numero de la frase a devolver
-        devolver *= 1_000_000_000_000L;  // Lo multiplicamos por 1.000.000.000.000
-                                        // (Esto nos soluciona si son numeros exactos Ex: 3.000.000.000.000)
-        if (palabras.length>2){
-            devolver+=words(nuevoNumero2(palabras));
-        }
-        return devolver;
-    }
-
-    public static long hundTrillions(String num){
-        //Esta funcion la usaremos para numeros que contengan en el numero en letras hundred && trillion
-        // (pero hundred siempre estara delante)
-        long devolver =0;
-        String[] palabras = num.split(" ");
-
-        devolver += words(palabras[0].toLowerCase()); // Añadimos el primer numero de la frase a devolver
-        devolver *= 100_000_000_000_000L;  // Lo multiplicamos por 100.000.000.000.000
-                                            // (Esto nos soluciona si son numeros exactos Ex: 300.000.000.000.000)
-        if (palabras.length>3){
-            devolver+=words(nuevoNumero3(palabras));
-        }
-        return devolver;
-    }
-    public static long quadrillions(String num){
-        //Esta funcion la usaremos para numeros que contengan en el numero en letras quadrillion
-        long devolver =0;
-        String[] palabras = num.split(" ");
-
-        devolver += words(palabras[0].toLowerCase()); // Añadimos el primer numero de la frase a devolver
-        devolver *= 1_000_000_000_000_000L;  // Lo multiplicamos por 1.000.000.000.000.000
-                                            // (Esto nos soluciona si son numeros exactos Ex: 3.000.000.000.000.000)
-        if (palabras.length>2){
-            devolver+=words(nuevoNumero2(palabras));
-        }
-        return devolver;
-    }
-
-    public static long hundQuadrillion(String num){
-        //Esta funcion la usaremos para numeros que contengan en el numero en letras hundred && quadrillion
-        // (pero hundred siempre estara delante)
         long devolver =0;
         String[] palabras = num.split(" ");
 
         devolver += words(palabras[0].toLowerCase());   // Añadimos el primer numero de la frase a devolver
-        devolver *= 100_000_000_000_000_000L;           // Lo multiplicamos por 100.000.000.000.000.000
-                                                        // (Esto nos soluciona si son numeros exactos Ex: 300.000.000.000.000.000)
-        if (palabras.length>3){
-            devolver+=words(nuevoNumero3(palabras));
+        devolver *= multiplicador;                      // Lo multiplicamos por multiplicador
+        // (Esto nos soluciona si son numeros exactos Ex: 3.000.000.000.000.000.000)
+        if (palabras.length>cortador){
+            devolver+=words(newNumber(palabras,cortador));
         }
         return devolver;
     }
 
-    public static long quintillions(String num){
-        //Esta funcion la usaremos para numeros que contengan en el numero en letras quintillion
-        long devolver =0;
-        String[] palabras = num.split(" ");
-
-        devolver += words(palabras[0].toLowerCase());   // Añadimos el primer numero de la frase a devolver
-        devolver *= 1_000_000_000_000_000_000L;         // Lo multiplicamos por 1.000.000.000.000.000.000
-                                                        // (Esto nos soluciona si son numeros exactos Ex: 3.000.000.000.000.000.000)
-        if (palabras.length>2){
-            devolver+=words(nuevoNumero2(palabras));
-        }
-        return devolver;
-    }
-
-
-
-
-
-
-
-    //Funciones para crear nuevas frases quitando los numeros iniciales
-    public static String nuevoNumero2(String[] a){
+    //Funcion para crear nuevas frases quitando los numeros iniciales
+    public static String newNumber(String[] a, int x){
         StringBuilder newNum = new StringBuilder();
-        for (int i = 2; i < a.length; i++) {
-            newNum.append(a[i]+" ");
-        }
-        return newNum.toString();
-    }
-
-    public static String nuevoNumero3(String[] a){
-        StringBuilder newNum = new StringBuilder();
-        for (int i = 3; i < a.length; i++) {
+        for (int i = x; i < a.length; i++) {
             newNum.append(a[i]+" ");
         }
         return newNum.toString();
