@@ -49,7 +49,6 @@ public class Numbers {
         if (numero>=1_000_000_000_000L && numero < 1_000_000_000_000_000L){// De 1 trillion a 1 quatrillion
             devolucion.append(xxx(1_000_000_000_000L,numero,x));
         }
-
         if (numero>=1_000_000_000_000_000L && numero<1_000_000_000_000_000_000L){//1 quatrillion a 1 Quintillion
             devolucion.append(xxx(1_000_000_000_000_000L,numero,x));
         }
