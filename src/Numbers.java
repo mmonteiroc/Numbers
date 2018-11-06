@@ -15,6 +15,7 @@ public class Numbers {
 
     public static String numeros(long[] numeroDesglosado, long numero){
         StringBuilder devolucion = new StringBuilder();
+        long divisor=0;
 
         if (numero < 20){ // Solo si el numero es unico
             return numBasicos(numero);
@@ -37,30 +38,23 @@ public class Numbers {
                 }
             }
         }
-        if (numero>=1000 && numero < 1000000){//1000 to 1000000
-            devolucion.append(calcularNumero(1000,numero,numeroDesglosado));
-        }
-        if (numero>=1000000 && numero < 1000_000_000){ //1.000.000 to 1.000.000.000
-            devolucion.append(calcularNumero(1000000,numero,numeroDesglosado));
-        }
-        if (numero>=1_000_000_000 && numero < 1_000_000_000_000L){ // De 1 billion a 1 trillion
-            devolucion.append(calcularNumero(1_000_000_000,numero,numeroDesglosado));
-        }
-        if (numero>=1_000_000_000_000L && numero < 1_000_000_000_000_000L){// De 1 trillion a 1 quatrillion
-            devolucion.append(calcularNumero(1_000_000_000_000L,numero,numeroDesglosado));
-        }
-        if (numero>=1_000_000_000_000_000L && numero<1_000_000_000_000_000_000L){//1 quatrillion a 1 Quintillion
-            devolucion.append(calcularNumero(1_000_000_000_000_000L,numero,numeroDesglosado));
-        }
-        if (numero>=1_000_000_000_000_000_000L ){//1 Quintillion to +++++++++
-            devolucion.append(calcularNumero(1_000_000_000_000_000_000L, numero,numeroDesglosado));
-        }
+
+        if (numero>=1000 && numero < 1_000_000)                                     divisor=1000; //1000 to 1000000
+        if (numero>=1000000 && numero < 1000_000_000)                               divisor=1000000;//1.000.000 to 1.000.000.000
+        if (numero>=1_000_000_000 && numero < 1_000_000_000_000L)                   divisor=1_000_000_000;// De 1 billion a 1 trillion
+        if (numero>=1_000_000_000_000L && numero < 1_000_000_000_000_000L)          divisor=1_000_000_000_000L; // De 1 trillion a 1 quatrillion
+        if (numero>=1_000_000_000_000_000L && numero<1_000_000_000_000_000_000L)    divisor=1_000_000_000_000_000L; //1 quatrillion a 1 Quintillion
+        if (numero>=1_000_000_000_000_000_000L )                                    divisor=1_000_000_000_000_000_000L;//1 Quintillion to +++++++++
+
+        if (numero>=1000) devolucion.append(calcularNumero(divisor, numero,numeroDesglosado));
+
+
         return devolucion.toString();
     }
 
-    //Multiplicador
     public static String calcularNumero(long divisor, long numero, long[] numDesglosado){
         StringBuilder string = new StringBuilder();
+
         string.append(numeros(desglosarNum(numero/divisor),numero/divisor));
         string.append(" "+ceros(numDesglosado));
         long[]y = desglosarNum(numero%divisor);
@@ -117,22 +111,21 @@ public class Numbers {
         //En esta funcion lo que hacemos es desglosar el numero posicion a posicion
         //Si le pasamos el numero 1234, nos devolvera lo siguiente:
         //Un array con el contenido del numero con las posiciones en orden (pos 0 = 1, pos 1 = 2, pos 2 = 3, pos 3 = 4)
-        long[] numeros = new long[Long.toString(num).length()];
-        int longNum = Long.toString(num).length();
-        long[] numAdividir = new long[longNum];
+        char[] numeros = Long.toString(num).toCharArray();
+        StringBuilder st= new StringBuilder();
+        long[] devolver = new  long[numeros.length];
 
-        long x =1;
-        for (int i = longNum,j=0; i > 0; i--,j++) {
-            numAdividir[i-1] = x;
-            x = x*10;
-        }
-        long numero = num;
         for (int i = 0; i < numeros.length; i++) {
-            numeros[i] = (num/numAdividir[i]);
-            num = numero%numAdividir[i];
+            st.append(numeros[i]+"-");
         }
-        return numeros;
+        String[]  arrString = st.toString().split("-");
+        for (int i = 0; i < arrString.length; i++) {
+            devolver[i] = Long.parseLong(arrString[i]);
+        }
+
+        return devolver;
     }
+
 
     public static String ceros(long[] n){
         //Funcion que dependiendo de la longitud del nº nos
