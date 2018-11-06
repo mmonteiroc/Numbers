@@ -291,7 +291,7 @@ public class Numbers {
     }
 
     //FUNCIONES PARA DESGLOSAR Y AÑADIR NUMEROS
-    //Linea 271 to
+    //Linea 294 to 483
     public static long decimals(String s){
         long devolucion = 0;
         //Separamos el numero cortando en el guion y sumamos los dos numeros
