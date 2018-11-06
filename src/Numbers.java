@@ -10,7 +10,6 @@ public class Numbers {
         return devolucion.toString();
     }
 
-
     public static String numeros(int[] x, long n){
         StringBuilder devolucion = new StringBuilder();
 
@@ -172,23 +171,28 @@ public class Numbers {
         String[] palabras = s.split(" ");
         long devolver = 0;
 
-        if (palabras.length == 1){
-            if ( s.contains("-"))return decimals(s);
-            if (!s.contains("-"))return basicNumbers(s);
+        if (palabras.length == 1) {
+            if (s.contains("-")) return decimals(s);
+            if (!s.contains("-")) return basicNumbers(s);
         }
 
-
-        if (s.contains("hundred")){
+        if (s.contains("million")) {
+            devolver = millions(s);
+        }else if (palabras[1].contains("hundred")&&s.contains("thousand") || s.contains("hundred thousand")){
+            devolver = hunThous(s);
+        }else if (s.contains("thousand")){
+            devolver = thousand(s);
+        }else if(s.contains("hundred")){
             devolver = hundred(s);
         }
-
-
 
         return devolver;
     }
 
+
+
     public static long basicNumbers(String s){
-        switch (s){ //Numeros especiales unicos en el caso de que nos introduzcan un numero del 0 al 19
+        switch (s){ //Numeros especiales unicos
             case "zero":return(0);
             case "one":return(1);
             case "two":return(2);
@@ -246,6 +250,75 @@ public class Numbers {
             devolver+=words(palabras[3]);
         }
         return devolver;
+    }
+    public static long thousand(String num){
+        long devolver =0;
+        String[] palabras = num.split(" ");
+
+        //solucionamos los numeros multiplos de 1000 exactos
+        devolver += words(palabras[0].toLowerCase());
+        devolver *= 1000;
+
+        if (palabras.length >2){
+            //Creamos un array con el resto de los numeros
+            devolver+= words(nuevoNumero2(palabras));
+        }
+
+        return devolver;
+    }
+
+    public static long hunThous(String num) {
+        long devolver =0;
+        String[] palabras = num.split(" ");
+
+        //Para numeros exactos ( 100.000, 130.0000)
+        devolver += basicNumbers(palabras[0].toLowerCase());
+        devolver *= 100000;
+
+
+
+        if (palabras.length >3){
+            //Creamos un array con el resto de los numeros
+            StringBuilder nuevoNum = new StringBuilder();
+            for (int i = 3; i < palabras.length; i++) {
+                nuevoNum.append(palabras[i]);
+                nuevoNum.append(" ");
+            }
+            System.out.println(nuevoNum.toString());
+            devolver+= words(nuevoNum.toString());
+        }
+        return devolver;
+    }
+
+    public static long millions(String num){
+        long devolver =0;
+        String[] palabras = num.split(" ");
+
+        devolver += words(palabras[0].toLowerCase());
+        devolver *= 1000000;
+
+        if (palabras.length >3){
+            //Creamos un array con el resto de los numeros
+            StringBuilder newNum = new StringBuilder();
+
+            for (int i = 2; i < palabras.length; i++) {
+                newNum.append(palabras[i]);
+                newNum.append(" ");
+            }
+            devolver+= words(newNum.toString());
+        }
+
+
+        return devolver;
+    }
+
+    public static String nuevoNumero2(String[] a){
+        StringBuilder newNum = new StringBuilder();
+        for (int i = 2; i < a.length; i++) {
+            newNum.append(a[i]);
+            newNum.append(" ");
+        }
+        return newNum.toString();
     }
 
 

@@ -130,6 +130,7 @@ public class NumbersTest {
         assertEquals(4320, Numbers.words("four thousand three hundred and twenty"));
         assertEquals(7632, Numbers.words("seven thousand six hundred and thirty-two"));
         assertEquals(9000, Numbers.words("nine thousand"));
+        assertEquals(32000,Numbers.words("thirty-two thousand"));
     }
 
     @org.junit.Test
