@@ -39,18 +39,26 @@ public class Numbers {
             }
         }
 
+        if (numero>=1000){
+            divisor = obtenerDivisor(numero);
+            devolucion.append(calcularNumero(divisor, numero,numeroDesglosado));
+        }
+        return devolucion.toString();
+    }
+
+
+    public static long obtenerDivisor(long numero){
+        long divisor=0;
         if (numero>=1000 && numero < 1_000_000)                                     divisor=1000; //1000 to 1000000
         if (numero>=1000000 && numero < 1000_000_000)                               divisor=1000000;//1.000.000 to 1.000.000.000
         if (numero>=1_000_000_000 && numero < 1_000_000_000_000L)                   divisor=1_000_000_000;// De 1 billion a 1 trillion
         if (numero>=1_000_000_000_000L && numero < 1_000_000_000_000_000L)          divisor=1_000_000_000_000L; // De 1 trillion a 1 quatrillion
         if (numero>=1_000_000_000_000_000L && numero<1_000_000_000_000_000_000L)    divisor=1_000_000_000_000_000L; //1 quatrillion a 1 Quintillion
         if (numero>=1_000_000_000_000_000_000L )                                    divisor=1_000_000_000_000_000_000L;//1 Quintillion to +++++++++
-
-        if (numero>=1000) devolucion.append(calcularNumero(divisor, numero,numeroDesglosado));
-
-
-        return devolucion.toString();
+        return divisor;
     }
+
+
 
     public static String calcularNumero(long divisor, long numero, long[] numDesglosado){
         StringBuilder string = new StringBuilder();
