@@ -9,7 +9,7 @@ public class Numbers {
     /**
      * @param numero Numero que recive
      * @return String que devuelve
-     * <p>
+     *
      * Methods los cuales llama este method
      * @see #desglosarNum(long)
      * @see #numeros(long[], long)
@@ -77,14 +77,12 @@ public class Numbers {
      */
     public static long obtenerDivisor(long numero) {
         long divisor = 0;
-        if (numero >= 1000 && numero < 1_000_000) divisor = 1000; //1000 to 1000000
-        if (numero >= 1000000 && numero < 1000_000_000) divisor = 1000000;//1.000.000 to 1.000.000.000
-        if (numero >= 1_000_000_000 && numero < 1_000_000_000_000L) divisor = 1_000_000_000;// De 1 billion a 1 trillion
-        if (numero >= 1_000_000_000_000L && numero < 1_000_000_000_000_000L)
-            divisor = 1_000_000_000_000L; // De 1 trillion a 1 quatrillion
-        if (numero >= 1_000_000_000_000_000L && numero < 1_000_000_000_000_000_000L)
-            divisor = 1_000_000_000_000_000L; //1 quatrillion a 1 Quintillion
-        if (numero >= 1_000_000_000_000_000_000L) divisor = 1_000_000_000_000_000_000L;//1 Quintillion to +++++++++
+        if (numero >= 1000 && numero < 1_000_000)                                       divisor = 1000; //1000 to 1000000
+        if (numero >= 1000000 && numero < 1000_000_000)                                 divisor = 1000000;//1.000.000 to 1.000.000.000
+        if (numero >= 1_000_000_000 && numero < 1_000_000_000_000L)                     divisor = 1_000_000_000;// De 1 billion a 1 trillion
+        if (numero >= 1_000_000_000_000L && numero < 1_000_000_000_000_000L)            divisor = 1_000_000_000_000L; // De 1 trillion a 1 quatrillion
+        if (numero >= 1_000_000_000_000_000L && numero < 1_000_000_000_000_000_000L)    divisor = 1_000_000_000_000_000L; //1 quatrillion a 1 Quintillion
+        if (numero >= 1_000_000_000_000_000_000L)                                       divisor = 1_000_000_000_000_000_000L;//1 Quintillion to +++++++++
         return divisor;
     }
 
@@ -126,51 +124,29 @@ public class Numbers {
      */
     public static String numBasicos(long numero) {
         switch ((int) numero) {
-            case 0:
-                return "Zero";
-            case 1:
-                return "One";
-            case 2:
-                return "Two";
-            case 3:
-                return "Three";
-            case 4:
-                return "Four";
-            case 5:
-                return "Five";
-            case 6:
-                return "Six";
-            case 7:
-                return "Seven";
-            case 8:
-                return "Eight";
-            case 9:
-                return "Nine";
-            case 10:
-                return "Ten";
-            case 11:
-                return "Eleven";
-            case 12:
-                return "Twelve";
-            case 13:
-                return "Thirteen";
-            case 14:
-                return "Fourteen";
-            case 15:
-                return "Fifteen";
-            case 16:
-                return "Sixteen";
-            case 17:
-                return "Seventeen";
-            case 18:
-                return "Eighteen";
-            case 19:
-                return "Nineteen";
-            default:
-                return "";
+            case 0:     return "Zero";
+            case 1:     return "One";
+            case 2:     return "Two";
+            case 3:     return "Three";
+            case 4:     return "Four";
+            case 5:     return "Five";
+            case 6:     return "Six";
+            case 7:     return "Seven";
+            case 8:     return "Eight";
+            case 9:     return "Nine";
+            case 10:    return "Ten";
+            case 11:    return "Eleven";
+            case 12:    return "Twelve";
+            case 13:    return "Thirteen";
+            case 14:    return "Fourteen";
+            case 15:    return "Fifteen";
+            case 16:    return "Sixteen";
+            case 17:    return "Seventeen";
+            case 18:    return "Eighteen";
+            case 19:    return "Nineteen";
+            default:    return "";
         }
     }
-
     /**
      * ESTA FUNCION NOS DEVUELVE LOS NUMEROS
      * 20,30,40,50,60,70,80,90 YA QUE SON UNICOS
@@ -180,24 +156,15 @@ public class Numbers {
      */
     public static String decenas(long decena) {
         switch ((int) decena) {
-            case 2:
-                return "Twenty";
-            case 3:
-                return "Thirty";
-            case 4:
-                return "Forty";
-            case 5:
-                return "Fifty";
-            case 6:
-                return "Sixty";
-            case 7:
-                return "Seventy";
-            case 8:
-                return "Eighty";
-            case 9:
-                return "Ninety";
-            default:
-                return "imposible";
+            case 2:     return "Twenty";
+            case 3:     return "Thirty";
+            case 4:     return "Forty";
+            case 5:     return "Fifty";
+            case 6:     return "Sixty";
+            case 7:     return "Seventy";
+            case 8:     return "Eighty";
+            case 9:     return "Ninety";
+            default:    return "imposible";
         }
     }
 
@@ -231,35 +198,17 @@ public class Numbers {
         switch (longitud) {
             case 3:
                 return "hundred";
-
-            case 4:
-            case 5:
-            case 6:
+            case 4: case 5: case 6:
                 return "thousand";
-
-            case 7:
-            case 8:
-            case 9:
+            case 7: case 8: case 9:
                 return "million";
-
-            case 10:
-            case 11:
-            case 12:
+            case 10: case 11: case 12:
                 return "billion";
-
-            case 13:
-            case 14:
-            case 15:
+            case 13: case 14: case 15:
                 return "trillion";
-
-            case 16:
-            case 17:
-            case 18:
+            case 16: case 17: case 18:
                 return "quadrillion";
-
-            case 19:
-            case 20:
-            case 21:
+            case 19: case 20: case 21:
                 return "quintillion";
         }
         return "";
@@ -339,64 +288,35 @@ public class Numbers {
      */
     public static long basicNumbers(String fraseNum) {
         switch (fraseNum) {
-            case "zero":
-                return (0);
-            case "one":
-                return (1);
-            case "two":
-                return (2);
-            case "three":
-                return (3);
-            case "four":
-                return (4);
-            case "five":
-                return (5);
-            case "six":
-                return (6);
-            case "seven":
-                return (7);
-            case "eight":
-                return (8);
-            case "nine":
-                return (9);
-            case "ten":
-                return (10);
-            case "eleven":
-                return (11);
-            case "twelve":
-                return (12);
-            case "thirteen":
-                return (13);
-            case "fourteen":
-                return (14);
-            case "fifteen":
-                return (15);
-            case "sixteen":
-                return (16);
-            case "seventeen":
-                return (17);
-            case "eighteen":
-                return (18);
-            case "nineteen":
-                return (19);
-            case "twenty":
-                return (20);
-            case "thirty":
-                return (30);
-            case "forty":
-                return (40);
-            case "fifty":
-                return (50);
-            case "sixty":
-                return (60);
-            case "seventy":
-                return (70);
-            case "eighty":
-                return (80);
-            case "ninety":
-                return (90);
-            default:
-                return 0;
+            case "zero":        return (0);
+            case "one":         return (1);
+            case "two":         return (2);
+            case "three":       return (3);
+            case "four":        return (4);
+            case "five":        return (5);
+            case "six":         return (6);
+            case "seven":       return (7);
+            case "eight":       return (8);
+            case "nine":        return (9);
+            case "ten":         return (10);
+            case "eleven":      return (11);
+            case "twelve":      return (12);
+            case "thirteen":    return (13);
+            case "fourteen":    return (14);
+            case "fifteen":     return (15);
+            case "sixteen":     return (16);
+            case "seventeen":   return (17);
+            case "eighteen":    return (18);
+            case "nineteen":    return (19);
+            case "twenty":      return (20);
+            case "thirty":      return (30);
+            case "forty":       return (40);
+            case "fifty":       return (50);
+            case "sixty":       return (60);
+            case "seventy":     return (70);
+            case "eighty":      return (80);
+            case "ninety":      return (90);
+            default:            return 0;
         }
     }
 
