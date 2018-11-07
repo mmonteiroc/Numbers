@@ -39,7 +39,6 @@ public class Numbers {
      * @see #obtenerDivisor(long)
      * @see #calcularNumero(long, long, long[])
      */
-
     public static String numeros(long[] numeroDesglosado, long numero) {
         StringBuilder devolucion = new StringBuilder();
         long divisor = 0;
@@ -232,26 +231,32 @@ public class Numbers {
         switch (longitud) {
             case 3:
                 return "hundred";
+
             case 4:
             case 5:
             case 6:
                 return "thousand";
+
             case 7:
             case 8:
             case 9:
                 return "million";
+
             case 10:
             case 11:
             case 12:
                 return "billion";
+
             case 13:
             case 14:
             case 15:
                 return "trillion";
+
             case 16:
             case 17:
             case 18:
                 return "quadrillion";
+
             case 19:
             case 20:
             case 21:
@@ -297,23 +302,31 @@ public class Numbers {
 
         //Comprobamos el numero que es con las palabras que
         // contiene y llamamos a la funcion que le pertenece
-        if (fraseNumeros.contains("quintillion")) return wordToNumbers(fraseNumeros, 1_000_000_000_000_000_000L, 2);
-        else if (palabras[1].contains("hundred") && fraseNumeros.contains("quadrillion") || fraseNumeros.contains("hundred quadrillion"))
+        if (fraseNumeros.contains("quintillion")) {
+            return wordToNumbers(fraseNumeros, 1_000_000_000_000_000_000L, 2);
+        } else if (palabras[1].contains("hundred") && fraseNumeros.contains("quadrillion") || fraseNumeros.contains("hundred quadrillion")) {
             return wordToNumbers(fraseNumeros, 100_000_000_000_000_000L, 3);
-        else if (fraseNumeros.contains("quadrillion")) return wordToNumbers(fraseNumeros, 1_000_000_000_000_000L, 2);
-        else if (palabras[1].contains("hundred") && fraseNumeros.contains("trillion") || fraseNumeros.contains("hundred trillion"))
+        } else if (fraseNumeros.contains("quadrillion")) {
+            return wordToNumbers(fraseNumeros, 1_000_000_000_000_000L, 2);
+        } else if (palabras[1].contains("hundred") && fraseNumeros.contains("trillion") || fraseNumeros.contains("hundred trillion")) {
             return wordToNumbers(fraseNumeros, 100_000_000_000_000L, 3);
-        else if (fraseNumeros.contains("trillion")) return wordToNumbers(fraseNumeros, 1_000_000_000_000L, 2);
-        else if (palabras[1].contains("hundred") && fraseNumeros.contains("billion") || fraseNumeros.contains("hundred billion"))
+        } else if (fraseNumeros.contains("trillion")) {
+            return wordToNumbers(fraseNumeros, 1_000_000_000_000L, 2);
+        } else if (palabras[1].contains("hundred") && fraseNumeros.contains("billion") || fraseNumeros.contains("hundred billion")) {
             return wordToNumbers(fraseNumeros, 100_000_000_000L, 3);
-        else if (fraseNumeros.contains("billion")) return wordToNumbers(fraseNumeros, 1_000_000_000, 2);
-        else if (palabras[1].contains("hundred") && fraseNumeros.contains("million") || fraseNumeros.contains("hundred million"))
+        } else if (fraseNumeros.contains("billion")) {
+            return wordToNumbers(fraseNumeros, 1_000_000_000, 2);
+        } else if (palabras[1].contains("hundred") && fraseNumeros.contains("million") || fraseNumeros.contains("hundred million")) {
             return wordToNumbers(fraseNumeros, 100000000, 3);
-        else if (fraseNumeros.contains("million")) return wordToNumbers(fraseNumeros, 1000000, 2);
-        else if (palabras[1].contains("hundred") && fraseNumeros.contains("thousand") || fraseNumeros.contains("hundred thousand"))
+        } else if (fraseNumeros.contains("million")) {
+            return wordToNumbers(fraseNumeros, 1000000, 2);
+        } else if (palabras[1].contains("hundred") && fraseNumeros.contains("thousand") || fraseNumeros.contains("hundred thousand")) {
             return wordToNumbers(fraseNumeros, 100000, 3);
-        else if (fraseNumeros.contains("thousand")) return wordToNumbers(fraseNumeros, 1000, 2);
-        else if (fraseNumeros.contains("hundred")) return hundred(fraseNumeros);
+        } else if (fraseNumeros.contains("thousand")) {
+            return wordToNumbers(fraseNumeros, 1000, 2);
+        } else if (fraseNumeros.contains("hundred")) {
+            return hundred(fraseNumeros);
+        }
 
         return devolver;
     }
