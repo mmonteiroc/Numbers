@@ -1,7 +1,7 @@
 /**
  * @author Miguel Monteiro Claveri
  * @email miguelmonteiroclaveri@gmail.com
- * @project Pactica Numbers
+ * @project Pactica prueba
  * Creation date: 5/11/18
  */
 public class Numbers {

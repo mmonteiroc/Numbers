@@ -1,6 +1,6 @@
 import static org.junit.Assert.*;
 
-public class NumbersTest {
+public class pruebaTest {
     @org.junit.Test
     public void test1() {
         assertEquals("One", Numbers.say(1));
